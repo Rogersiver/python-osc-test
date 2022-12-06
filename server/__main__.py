@@ -1,8 +1,7 @@
 import os
-import pprint
-pp = pprint.PrettyPrinter(width=41, compact=True)
-from flask import Flask, render_template, request
+from flask import Flask, request
 from flask_cors import CORS, cross_origin
+
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -29,14 +28,17 @@ def create_app(test_config=None):
 
     @app.route('/')
     def index():
-        return render_template('index.html')
+        return '<h1>Index</h1>'
 
     @app.route('/rgb', methods=['POST'])
     @cross_origin()
     def change_rgb():
         rgb_data = request.get_json()
-        pp.pprint(rgb_data)
+        print(int(rgb_data['r']))
         return 'Success'
-    
+
     print('Starting Flask!')
     return app
+if __name__ == '__main__':
+    create_app().run(host='0.0.0.0', port=5000, debug=True)
+

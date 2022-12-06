@@ -9,6 +9,6 @@
 
  COPY . .
 
- CMD ["flask", "--app",  "flaskr", "--debug", "run", "--host=0.0.0.0"]
+ CMD ["python3", "server"]
 
 
