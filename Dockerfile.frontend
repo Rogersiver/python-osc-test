@@ -1,0 +1,22 @@
+FROM node:16
+
+RUN mkdir -p /frontend && chown -R node:node /frontend
+
+WORKDIR /frontend
+
+COPY ./client/package.json /frontend
+COPY --chown=node:node ./client /frontend
+
+USER node
+
+
+EXPOSE 4173
+EXPOSE 5173
+
+RUN yarn install
+
+CMD ["yarn", "dev", "--", "--host", "0.0.0.0"]
+
+
+
+

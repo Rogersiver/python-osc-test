@@ -36,7 +36,7 @@ def create_app(test_config=None):
     def change_rgb():
         rgb_data = request.get_json()
         pp.pprint(rgb_data)
-        return 'Got RGB Values'
+        return 'Success'
     
     print('Starting Flask!')
     return app

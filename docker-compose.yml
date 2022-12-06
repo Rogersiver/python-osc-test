@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  backend:
+    hostname: backend
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.backend
+    ports:
+      - 5000:5000
+  frontend:
+    image: node-latest
+    hostname: frontend
+    depends_on:
+      - backend
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.frontend
+    ports:
+      - 5173:5173
