@@ -8,6 +8,7 @@ services:
     ports:
       - 5000:5000
       - 7771:7771
+    restart: unless-stopped
   frontend:
     image: node-latest
     hostname: frontend
@@ -18,3 +19,4 @@ services:
       dockerfile: ./Dockerfile.frontend
     ports:
       - 5173:5173
+    restart: unless-stopped
