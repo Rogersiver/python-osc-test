@@ -17,15 +17,16 @@ function App()
     }
   })
 
-  const handleChange = (color: any) =>
+  const handleChange = async (color: any) =>
   {
+    const response = await axios.post('http://localhost:5000/rgb', color);
     setColor(color.rgb);
   }
 
   const handleChangeComplete = async (color: any) =>
   {
     const response = await axios.post('http://localhost:5000/rgb', color);
-    console.log(response.data);
+    setColor(color.rgb);
   }
   return (
     <div className="App">

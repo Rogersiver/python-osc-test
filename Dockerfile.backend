@@ -9,6 +9,9 @@
 
  COPY . .
 
+ EXPOSE 5000
+ EXPOSE 7771
+
  CMD ["python3", "server"]
 
 

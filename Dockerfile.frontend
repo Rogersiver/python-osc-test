@@ -10,7 +10,6 @@ COPY --chown=node:node ./client /frontend
 USER node
 
 
-EXPOSE 4173
 EXPOSE 5173
 
 RUN yarn install

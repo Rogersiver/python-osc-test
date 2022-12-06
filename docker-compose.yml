@@ -7,6 +7,7 @@ services:
       dockerfile: ./Dockerfile.backend
     ports:
       - 5000:5000
+      - 7771:7771
   frontend:
     image: node-latest
     hostname: frontend
