@@ -39,7 +39,7 @@
       shell: 'git clone https://github.com/Rogersiver/python-osc-test'
 
     - name: Start Application
-      community.docker.docker_compose:
-        project_src: /home/pi/python-osc-test
-        files:
-          - docker-compose.yml
+      become: True
+      shell:
+        cmd: 'docker-compose -f docker-compose.yml up -d'
+        chdir: /home/pi/python-osc-test/
