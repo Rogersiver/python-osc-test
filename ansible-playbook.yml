@@ -34,12 +34,21 @@
 
     - name: Cleanup Docker Install Script
       shell: 'rm -rf get-docker.sh'
+      args:
+        removes: '/home/pi/get-docker.sh'
 
     - name: Pull down project
       shell: 'git clone https://github.com/Rogersiver/python-osc-test'
+      args:
+        creates: '/home/pi/python-osc-test/'
 
     - name: Start Application
       become: True
       shell:
         cmd: 'docker-compose -f docker-compose.yml up -d'
         chdir: /home/pi/python-osc-test/
+
+    - name: Get info
+      docker_host_info:
+        containers: True
+      register: result

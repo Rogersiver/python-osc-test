@@ -21,19 +21,14 @@ function App()
   {
     const response = await axios.post('http://192.168.1.160:5000/rgb', color);
     setColor(color.rgb);
+    return response.data;
   }
 
-  const handleChangeComplete = async (color: any) =>
-  {
-    const response = await axios.post('http://192.168.1.160:5000/rgb', color);
-    setColor(color.rgb);
-  }
   return (
     <div className="App">
       <SketchPicker
         onChange={handleChange}
         color={color}
-        onChangeComplete={handleChangeComplete}
       />
     </div>
   )

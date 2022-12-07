@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-        # Wouldnt do this in prod
+        # Would realistically come from data store
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
@@ -24,35 +24,23 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    ip = "192.168.1.183"
-    port = 7771
-    client = SimpleUDPClient(ip, port)  # Create client
-
     cors = CORS(app)
     app.config['CORS_HEADERS'] = 'Content-Type'
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World! Its Me'
-
-    @app.route('/')
-    def index():
-        return '<h1>Index</h1>'
+    ip = "192.168.1.183"
+    port = 7771
+    client = SimpleUDPClient(ip, port)  # Create client
 
     @app.route('/rgb', methods=['POST'])
     @cross_origin()
     def change_rgb():
         rgb_data = request.get_json()
+        client.send_message("/r", int(rgb_data['rgb']['r']))
+        client.send_message("/g", int(rgb_data['rgb']['g']))
+        client.send_message('/b', int(rgb_data['rgb']['b']))
+        client.send_message('/a', 1)
         logging.info(rgb_data)
-        r = int(rgb_data['rgb']['r'])
-        g = int(rgb_data['rgb']['g'])
-        b = int(rgb_data['rgb']['b'])
-        a = 1
-        client.send_message("/r", r)
-        client.send_message("/g", g)
-        client.send_message('/b', b)
-        client.send_message('/a', a)
-        return 'Success'
+        return 'Changed Color!'
 
     print('Starting Flask!')
     return app

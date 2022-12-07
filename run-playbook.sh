@@ -1,0 +1,1 @@
+ansible-playbook -i /etc/ansible/hosts -u pi ansible-playbook.yml -vv
