@@ -19,13 +19,13 @@ function App()
 
   const handleChange = async (color: any) =>
   {
-    const response = await axios.post('http://localhost:5000/rgb', color);
+    const response = await axios.post('http://192.168.1.160:5000/rgb', color);
     setColor(color.rgb);
   }
 
   const handleChangeComplete = async (color: any) =>
   {
-    const response = await axios.post('http://localhost:5000/rgb', color);
+    const response = await axios.post('http://192.168.1.160:5000/rgb', color);
     setColor(color.rgb);
   }
   return (

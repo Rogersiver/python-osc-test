@@ -24,7 +24,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    ip = "host.docker.internal"
+    ip = "192.168.1.183"
     port = 7771
     client = SimpleUDPClient(ip, port)  # Create client
 
